@@ -8,18 +8,44 @@ const handleUpClick = ()=>{
   // console.log("Uppercase was clicked"+text);
   let newText = text.toUpperCase();
   setText(newText);
-
 }
 
-function handledownClick(str) {
+const handledownClick = ()=>  {
   let newText = text.toLowerCase();
   setText(newText);
 }
+
+const handleClearClick= () => {
+  let newText = "";
+  setText(newText);
+}
+
+const TitleCase= () => {
+let words = text.split(' ')
+let uppercaseword=''
+words.forEach(element => { 
+  uppercaseword = uppercaseword+element.charAt(0).toUpperCase()+element.slice(1).toLowerCase()+" "
+});
+setText(uppercaseword)
+}
+
+const handleCopy= () => {
+ var text = document.getElementById("myBox");
+ text.select();
+ document.execCommand('copy');
+}
+
+const handleExtraSpaces = () => {
+  let newText = text.split(/[ ]+/);
+  setText(newText.join(" "))
+}
+
 
 const handleOnChange= (event)=>{
   // console.log("on Change");
   setText(event.target.value);
 }
+
 
   const [text, setText] = useState('Enter Text Here');
   return (
@@ -32,6 +58,11 @@ const handleOnChange= (event)=>{
     
     <button type="button" className="btn btn-primary" style={{margin: 3}} onClick={handleUpClick}>Convert to Uppercase</button>
     <button type="button" className="btn btn-primary"  style={{margin: 3}} onClick={handledownClick}>Convert to LowerCase</button>
+    <button type="button" className="btn btn-primary"  style={{margin: 3}} onClick={handleClearClick}>Clear Text</button>
+    <button type="button" className="btn btn-primary"  style={{margin: 3}} onClick={TitleCase}>Title Case</button>
+    <button type="button" className="btn btn-primary"  style={{margin: 3}} onClick={handleCopy}>Copy Text</button>
+    <button type="button" className="btn btn-primary"  style={{margin: 3}} onClick={handleExtraSpaces}>Remove Extra Spaces</button>
+
     </div>
 
     <div className="container my-3">
