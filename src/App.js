@@ -1,9 +1,15 @@
 import Navbar from './components/Navbar';
 import './App.css';
 import TextForm from './components/TextForm';
-// import About from './components/About';
+ import About from './components/About';
 import React, { useState } from 'react';
 import Alert from './components/Alert';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 
 function App() {
@@ -40,15 +46,22 @@ const toggleMode = () => {
 
   return (
    <>  
+   <Router>
 <Navbar title="TextUtils" home="Home" about="About-TextUtils" mode={mode} toggleMode={toggleMode} />
 
 <Alert alert={alert} />
 
 <div className="container my-3">
-<TextForm showAlert={showAlert} heading="Enter the text to analyze below" mode={mode} />
-{/* <About/> */}
+<Switch>
+          <Route exact path="/about">
+            <About />
+          </Route>
+          <Route exact path="/">
+          <TextForm showAlert={showAlert} heading="Enter the text to analyze below" mode={mode} />
+            </Route>
+        </Switch>
 </div>
-
+</Router>
 {/* <Navbar home="Home"  /> */}
    </>
   );
